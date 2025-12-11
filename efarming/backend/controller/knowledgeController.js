@@ -2,6 +2,11 @@
 import KnowledgeHub from '../model/knowledge.js'
 import path from 'path'
 import fs from 'fs'
+import { fileURLToPath } from 'url'
+
+// Resolve __dirname for ES modules so file cleanup works
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 // @desc    Get all knowledge items with advanced filtering, sorting and pagination
 // @route   GET /api/knowledge
