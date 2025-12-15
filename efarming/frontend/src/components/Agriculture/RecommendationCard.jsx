@@ -1,7 +1,7 @@
 import React from 'react';
 import { TrendingUp, DollarSign, Calendar, BarChart, Sprout } from 'lucide-react';
 
-const RecommendationCard = ({ recommendation }) => {
+const RecommendationCard = ({ recommendation, marketPrices = [], cultivationCosts = [] }) => {
   const getSuitabilityColor = (score) => {
     if (!score) return 'bg-gray-100 text-gray-800';
     const scoreLower = score.toLowerCase();
@@ -24,13 +24,19 @@ const RecommendationCard = ({ recommendation }) => {
   const suitabilityScore = recommendation.suitabilityScore || 'Medium';
   const durationMonths = recommendation.durationMonths || 6;
   const reason = recommendation.reason || 'Recommended based on analysis.';
-  
-  // Find market price for this crop
-  let marketPrice = 'Market price not available';
-  let demandTrend = 'Medium';
-  
-  // Try to find crop cost
-  let costPerAcre = 'Cost estimate not available';
+
+  // Match market price and demand trend from the shared list
+  const priceEntry = marketPrices.find(
+    (p) => p.cropName?.toLowerCase() === cropName.toLowerCase()
+  );
+  const marketPrice = priceEntry?.pricePerKg || 'Market price not available';
+  const demandTrend = priceEntry?.demandTrend || 'Medium';
+
+  // Match cultivation cost data
+  const costEntry = cultivationCosts.find(
+    (c) => c.cropName?.toLowerCase() === cropName.toLowerCase()
+  );
+  const costPerAcre = costEntry?.costPerAcre || 'Cost estimate not available';
 
   return (
     <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden">

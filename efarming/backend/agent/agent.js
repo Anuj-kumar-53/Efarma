@@ -37,54 +37,46 @@ const WEATHER_CODES = {
 // Function to clean and parse JSON response
 const cleanAndParseJSON = (response) => {
     console.log("Attempting to parse LLM response, length:", response.length);
-    
-    // If response is empty or too short
+
     if (!response || response.trim().length < 10) {
         throw new Error("Empty or insufficient LLM response");
     }
-    
+
+    // 1️⃣ Remove BOM + trim
+    let text = response.replace(/^\uFEFF/, "").trim();
+
+    // 2️⃣ Remove markdown blocks if any
+    text = text
+        .replace(/```json\s*/gi, "")
+        .replace(/```\s*/g, "")
+        .trim();
+
+    // 3️⃣ Extract JSON safely
+    const start = text.indexOf("{");
+    const end = text.lastIndexOf("}");
+
+    if (start === -1 || end === -1 || end <= start) {
+        throw new Error("No JSON object found in LLM response");
+    }
+
+    text = text.substring(start, end + 1);
+
+    // 4️⃣ Fix smart quotes (THIS WAS MISSING)
+    text = text
+        .replace(/[“”]/g, '"')
+        .replace(/[‘’]/g, "'");
+
+    // 5️⃣ Remove trailing commas (THIS WAS MISSING)
+    text = text.replace(/,\s*([}\]])/g, "$1");
+
     try {
-        // First try: Direct JSON parse
-        console.log("Attempt 1: Direct JSON parse");
-        return JSON.parse(response);
-    } catch (firstError) {
-        console.log("Direct parse failed, trying cleanup...");
-        
-        try {
-            // Second try: Remove markdown code blocks and trim
-            let cleaned = response
-                .replace(/```json\s*/g, '')
-                .replace(/```\s*/g, '')
-                .trim();
-            
-            console.log("Cleaned response first 200 chars:", cleaned.substring(0, 200));
-            return JSON.parse(cleaned);
-        } catch (secondError) {
-            console.log("Cleaned parse failed, trying regex extraction...");
-            
-            // Third try: Extract JSON using regex
-            const jsonMatch = response.match(/\{[\s\S]*\}/);
-            if (jsonMatch) {
-                const extracted = jsonMatch[0]; // Move declaration outside try block
-                try {
-                    console.log("Extracted JSON first 200 chars:", extracted.substring(0, 200));
-                    return JSON.parse(extracted);
-                } catch (thirdError) {
-                    console.error("Failed to parse extracted JSON:", thirdError.message);
-                    // Log more context - now 'extracted' is accessible
-                    console.log("Failed JSON snippet:", 
-                        extracted.substring(Math.max(0, extracted.length - 200)));
-                }
-            }
-            
-            console.error("All parsing attempts failed");
-            console.error("Original response first 500 chars:", response.substring(0, 500));
-            console.error("Original response last 500 chars:", response.substring(Math.max(0, response.length - 500)));
-            
-            throw new Error("Unable to parse LLM response as JSON after multiple attempts");
-        }
+        return JSON.parse(text);
+    } catch (err) {
+        console.error("FINAL CLEANED JSON (DEBUG):\n", text);
+        throw new Error("Unable to parse LLM response as JSON after cleaning");
     }
 };
+
 
 // Add a fallback response generator
 const createFallbackResponse = (weatherData, weatherCodes) => {

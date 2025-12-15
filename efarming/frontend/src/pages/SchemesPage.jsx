@@ -28,14 +28,19 @@ const SchemesPage = () => {
   useEffect(() => {
     fetchSchemes();
     fetchPopularSchemes();
-  }, [selectedCategory]);
+  }, []);
+
+  // Keep the list in sync when filters/search change (like Knowledge Hub)
+  useEffect(() => {
+    fetchSchemes();
+  }, [selectedCategory, searchQuery]);
 
   const fetchSchemes = async () => {
     setLoading(true);
     try {
       const params = {};
       if (selectedCategory) params.category = selectedCategory;
-      if (searchQuery) params.q = searchQuery;
+      if (searchQuery) params.search = searchQuery;
       
       const response = await schemeAPI.getAll(params);
       setSchemes(response.data.data || []);
@@ -63,7 +68,6 @@ const SchemesPage = () => {
   const clearFilters = () => {
     setSelectedCategory('');
     setSearchQuery('');
-    fetchSchemes();
   };
 
   return (
@@ -155,6 +159,7 @@ const SchemesPage = () => {
             <h3 className="text-sm font-medium text-gray-700 mb-3">Filter by Category</h3>
             <div className="flex flex-wrap gap-2">
               <button
+                type="button"
                 onClick={() => setSelectedCategory('')}
                 className={`px-4 py-2 rounded-full text-sm font-medium ${
                   selectedCategory === ''
@@ -166,6 +171,7 @@ const SchemesPage = () => {
               </button>
               {categories.map((category) => (
                 <button
+                  type="button"
                   key={category}
                   onClick={() => setSelectedCategory(category)}
                   className={`px-4 py-2 rounded-full text-sm font-medium ${

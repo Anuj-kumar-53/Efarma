@@ -309,7 +309,12 @@ const AgriculturePage = () => {
               <h2 className="text-2xl font-bold text-gray-800 mb-6">Recommended Crops</h2>
               <div className="space-y-6">
                 {recommendations.recommendedCrops.map((crop, index) => (
-                  <RecommendationCard key={index} recommendation={crop} />
+                  <RecommendationCard
+                    key={index}
+                    recommendation={crop}
+                    marketPrices={recommendations.marketPrices || []}
+                    cultivationCosts={recommendations.cultivationCost || []}
+                  />
                 ))}
               </div>
             </div>
