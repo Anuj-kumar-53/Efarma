@@ -53,9 +53,9 @@ const KnowledgeHubPage = () => {
   }, []);
 
   useEffect(() => {
-    if (selectedCategory || searchQuery) {
+    // if (selectedCategory || searchQuery) {
       fetchKnowledgeItems();
-    }
+    // }
   }, [selectedCategory, searchQuery]);
 
   const fetchKnowledgeItems = async () => {
