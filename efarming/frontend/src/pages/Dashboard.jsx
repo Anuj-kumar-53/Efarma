@@ -8,8 +8,10 @@ import {
   Clock, Users, Heart, Leaf, Sprout, Tractor
 } from 'lucide-react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(useGSAP);
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
