@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // IMPORTANT: Backend is running on port 8000, not 5000 or 3000
-const API_BASE_URL = import.meta.env.BACKEND_URL || 'https://efarma.vercel.app/api';
+const API_BASE_URL = import.meta.env.BACKEND_URL || 'https://efarma.onrender.com/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
