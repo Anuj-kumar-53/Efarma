@@ -82,8 +82,4 @@ app.use((req, res) => {
 connectDB();
 
 const port = process.env.PORT || 8000;
-app.listen(port, () => {
-  console.log(`Server started at port ${port}`);
-  console.log(`Uploads directory: ${path.join(__dirname, 'uploads')}`);
-  console.log(`Static files served at: http://localhost:${port}/uploads/`);
-});
+export default app;
