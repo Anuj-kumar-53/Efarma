@@ -25,11 +25,7 @@ const Dashboard = () => {
     setMounted(true);
   }, []);
 
-  // Redirect admins to their dedicated dashboard
-  if (userType === 'admin') {
-    return <Navigate to="/admin/dashboard" replace />;
-  }
-
+  
   // Use GSAP hook BEFORE any conditional returns
   useGSAP(() => {
     // Hero section animations
@@ -65,12 +61,16 @@ const Dashboard = () => {
         delay: i * 0.1
       });
     });
-
+    
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, { scope: container });
-
+  
+  // Redirect admins to their dedicated dashboard
+  if (userType === 'admin') {
+    return <Navigate to="/admin/dashboard" replace />;
+  }
   // Features with enhanced content
   const features = [
     {
