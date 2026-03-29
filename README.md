@@ -5,10 +5,10 @@ E-Farmer is a modern full-stack web application designed to empower farmers with
 🚀 Live Demo
 
 Experience E-Farmer live:
-👉 https://efarming-dun.vercel.app/login
+👉 [https://efarming-dun.vercel.app/login](https://efarming-dun.vercel.app/login)
 
 👉 GitHub Repository:
-https://github.com/Anuj-kumar-53/Efarma
+[https://github.com/Anuj-kumar-53/Efarma](https://github.com/Anuj-kumar-53/Efarma)
 
 🌟 Features
 🌾 AI-Powered Crop Recommendation
@@ -19,22 +19,27 @@ Supports recommendations for 20+ crops
 Provides detailed cost breakdown for crop cultivation
 Helps farmers plan budget and resources efficiently
 Suggests optimized farming strategies
+
 🌍 Government Schemes Integration
 Displays relevant government schemes and subsidies for farmers
 Helps users easily discover financial support programs and benefits
 Simplifies access to agricultural policies and initiatives
+
 🌦️ Weather Forecast Integration
 Real-time weather data using Weather API
 Provides temperature, rainfall, and seasonal insights
 Helps farmers make better decisions for sowing, irrigation, and harvesting
+
 📊 Smart Dashboard
 User-friendly dashboard to manage agricultural data
 Displays recommendations, inputs, and results clearly
 Interactive UI for better decision-making
+
 🔐 Authentication System
 Secure login and signup functionality
 JWT-based authentication
 Protected routes for user-specific data
+
 🎨 Modern UI/UX
 Fully responsive design (mobile + desktop)
 Clean and intuitive interface using Tailwind CSS
