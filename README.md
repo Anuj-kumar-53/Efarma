@@ -5,7 +5,7 @@ E-Farmer is a modern full-stack web application designed to empower farmers with
 🚀 Live Demo
 
 Experience E-Farmer live:
-👉 [https://efarming-dun.vercel.app/login](https://efarming-dun.vercel.app/login)
+👉 https://efarming-dun.vercel.app/
 
 👉 GitHub Repository:
 [https://github.com/Anuj-kumar-53/Efarma](https://github.com/Anuj-kumar-53/Efarma)
