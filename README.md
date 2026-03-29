@@ -139,14 +139,17 @@ Fork the repo
 Create a branch
 Make changes
 Submit a PR
+
 🙏 Acknowledgments
 Built to support smart agriculture and digital farming
 Inspired by real-world farming challenges
 Powered by modern web technologies and AI
+
 🎯 Future Enhancements
 Crop disease detection using image processing 📸
 Multilingual support for farmers 🌍
 Mobile app version 📱
+
 🎉 Final Note
 
 Empowering farmers with technology — making agriculture smarter, efficient, and data-driven.
