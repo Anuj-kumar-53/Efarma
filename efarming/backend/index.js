@@ -23,7 +23,7 @@ app.use(express.json());
 
 // CORS configuration
 app.use(cors({
-  origin: "https://efarming-dun.vercel.app",    // your React frontend
+  origin: ["https://efarming-dun.vercel.app","http://localhost:5173/api"],    // your React frontend
   credentials: true,                  // allow cookies/auth
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization", "Accept"]
